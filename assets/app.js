@@ -190,31 +190,23 @@ function hideRegistration() {
 function registerUser(event) {
     event.preventDefault();
 
+
+    let listOfNames = [...document.getElementById("listOfNames").getElementsByTagName("input")];
+    listOfNames = listOfNames.map(input => input.value);
+    
     const formData = new FormData(event.target);
     const userData = {
-        pseudo: formData.get('pseudo') || document.getElementById('pseudo').value,
-        email: formData.get('email') || document.getElementById('email').value,
-        age: parseInt(formData.get('age') || document.getElementById('age').value),
-        registeredAt: new Date().toISOString()
+        grp_name: formData.get('grp_name') || document.getElementById('grp_name').value,        // bdd + local
+        player_nb: formData.get('player_nb') || document.getElementById('player_nb').value,     // local
+        player_names: listOfNames                                                               // local
     };
 
     // Validation simple
-    if (!userData.pseudo || !userData.email || !userData.age) {
-        alert('❌ Veuillez remplir tous les champs');
-        return;
-    }
+    // registration en bdd
 
-    if (userData.age < 13 || userData.age > 100) {
-        alert('❌ L\'âge doit être entre 13 et 100 ans');
-        return;
-    }
 
     // Sauvegarder en localStorage
     saveUserData(userData);
-
-    // Feedback et redirection
-    console.log('✅ Utilisateur enregistré:', userData);
-    alert(`👋 Bienvenue ${userData.pseudo}!`);
 
     // Redirection vers main.html
     setTimeout(() => {

@@ -22,7 +22,7 @@
         <!-- Header -->
         <div class="main-header">
             <div class="user-info" id="userInfo">
-                <span class="user-pseudo"></span>
+                <!-- can put things like game progress (.e.g "4/10 apps unlocked!")  -->
             </div>
             <h1>Mes Applications</h1>
         </div>
@@ -52,13 +52,10 @@
         document.addEventListener('DOMContentLoaded', () => {
             // Vérifier si l'utilisateur est connecté
             const userData = JSON.parse(localStorage.getItem('userData') || '{}');
-            if (!userData.pseudo) {
+            if (!userData.grp_name) {
                 window.location.href = 'index.html';
                 return;
             }
-            
-            // Afficher info utilisateur
-            document.querySelector('.user-pseudo').textContent = userData.pseudo;
             
             // Charger les apps
             loadApps();

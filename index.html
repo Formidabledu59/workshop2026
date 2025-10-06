@@ -29,10 +29,11 @@
                 <div class="unlock-section">
                     <div class="unlock-indicator"></div>
                     <p class="unlock-text">Balayez vers le haut pour déverrouiller</p>
-                    <button class="unlock-btn" onclick="showRegistration()">
+                    <!-- <button class="unlock-btn" onclick="showRegistration()">
                         <span class="unlock-icon">🔓</span>
                         Déverrouiller
-                    </button>
+                    </button> -->
+                    <input type="range" id="unlock-btnNew" min="0" max="1" value="0" step="any">
                 </div>
             </div>
         </div>
@@ -41,26 +42,26 @@
         <div id="registration-form" class="registration-modal hidden">
             <div class="modal-backdrop" onclick="hideRegistration()"></div>
             <div class="modal-content">
-                <h2>Bienvenue</h2>
-                <p>Remplissez vos informations pour continuer</p>
+                <h2>Bienvenue !</h2>
+                <p>Dites-nous en plus sur vous avant de commencer</p>
                 
                 <form id="userForm" onsubmit="registerUser(event)">
                     <div class="form-group">
-                        <label class="form-label" for="pseudo">Pseudo</label>
-                        <input type="text" id="pseudo" class="form-control" required>
+                        <label class="form-label" for="grp_name">Blaze du groupe</label>
+                        <input type="text" id="grp_name" class="form-control" required onclick="selctTxt(this)">
                     </div>
                     
                     <div class="form-group">
-                        <label class="form-label" for="email">Email</label>
-                        <input type="email" id="email" class="form-control" required>
+                        <label class="form-label" for="player_nb">Nombre de joueurs</label>
+                        <input type="number" id="player_nb" class="form-control" min="2" max="4" required value="2" onclick="selctTxt(this)">
                     </div>
-                    
+
                     <div class="form-group">
-                        <label class="form-label" for="age">Âge</label>
-                        <input type="number" id="age" class="form-control" min="13" max="100" required>
+                        <label class="form-label" for="player_name">Blazes des joueurs</label>
+                        <div id="listOfNames"></div>
                     </div>
                     
-                    <button type="submit" class="btn-primary">Continuer</button>
+                    <button type="submit" class="btn-primary">Let's start!</button>
                 </form>
             </div>
         </div>
@@ -69,3 +70,64 @@
     <script src="assets/app.js"></script>
 </body>
 </html>
+
+<script>
+    const playerNumberInput = document.getElementById("player_nb");
+    const listOfNames = document.getElementById("listOfNames");
+
+    // Some shit I need to run when the page is loaded
+    document.addEventListener("DOMContentLoaded", () => {
+        updatePlayerNameList();
+    }),
+
+    // Action to "unlock" the screen
+    document.getElementById("unlock-btnNew").addEventListener("input", (e) => {
+        if (e.target.value > 0.5) showRegistration();
+    });
+
+    // Dynamically insert text inputs for players's name
+    playerNumberInput.addEventListener("input", updatePlayerNameList);
+
+    function updatePlayerNameList() {
+        listOfNames.innerHTML = "";     // remove child nodes
+
+        for (let i = 0; i < playerNumberInput.value; i++) {
+            let currInput = document.createElement("input");
+            currInput.type = "text";
+            currInput.name = `player_${i + 1}`;
+            currInput.required = "true";
+            currInput.value = `Joueur ${i + 1}`;
+            currInput.className = "form-control";
+            currInput.onclick = function() {selctTxt(this)};
+            listOfNames.appendChild(currInput);
+        }
+    }
+
+    // Reproduces the behavior of text selection on a phone when an input is selected
+    const selctTxt = (htmlElement) => htmlElement.select();
+</script>
+<style>
+    #unlock-btnNew {
+        -webkit-appearance: none;
+        appearance: none;
+        background: none;
+        transform: rotate(-90deg);
+        width: 60vh;
+    }
+    #unlock-btnNew::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        background: rgba(255, 255, 255, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        width: 50px;
+        height: 50px;
+        border-radius: 50px;
+        color: white;
+        cursor: pointer;
+    }
+    #listOfNames {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 5px;
+    }
+</style>
