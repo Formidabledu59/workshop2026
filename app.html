@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App - Workshop</title>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+    <!-- Status Bar Mobile -->
+    <div class="status-bar">
+        <span class="time" id="statusTime">14:00</span>
+        <div class="status-right">
+            <span class="signal">●●●●</span>
+            <span class="wifi">📶</span>
+            <span class="battery">87%</span>
+        </div>
+    </div>
+
+    <!-- Navigation header -->
+    <div class="app-header">
+        <button class="back-btn" onclick="goBack()">
+            <span class="back-icon">←</span>
+            Retour
+        </button>
+        <h1 id="app-title">Application</h1>
+    </div>
+
+    <!-- Loading state -->
+    <div id="app-loading" class="loading-state">
+        <div class="spinner"></div>
+        <p>Chargement de l'application...</p>
+    </div>
+
+    <!-- App content container -->
+    <div id="app-content" class="app-content hidden">
+        <!-- Contenu dynamique selon le type d'app -->
+    </div>
+
+    <!-- Error state -->
+    <div id="app-error" class="error-state hidden">
+        <div class="error-icon">⚠️</div>
+        <p>Impossible de charger l'application</p>
+        <button onclick="loadApp()" class="retry-btn">Réessayer</button>
+    </div>
+
+    <!-- Quiz templates (cachés) -->
+    <template id="quiz-template">
+        <div class="quiz-container">
+            <div class="quiz-header">
+                <div class="quiz-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0%"></div>
+                    </div>
+                    <span class="progress-text">Question 1 / 5</span>
+                </div>
+                <div class="quiz-score">
+                    <span class="score-label">Score:</span>
+                    <span class="score-value">0</span>
+                </div>
+            </div>
+            
+            <div class="quiz-content">
+                <div class="question-container">
+                    <h2 class="question-text"></h2>
+                    <div class="answers-container"></div>
+                </div>
+                
+                <div class="quiz-feedback hidden">
+                    <div class="feedback-icon"></div>
+                    <div class="feedback-text"></div>
+                    <button class="next-btn">Question suivante</button>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- Settings template -->
+    <template id="settings-template">
+        <div class="settings-container">
+            <div class="settings-section">
+                <h3>Apparence</h3>
+                <div class="setting-item">
+                    <label>Thème</label>
+                    <select id="theme-select" class="setting-control">
+                        <option value="light">Clair</option>
+                        <option value="dark">Sombre</option>
+                        <option value="purple">Violet</option>
+                    </select>
+                </div>
+                <div class="setting-item">
+                    <label>Taille de police</label>
+                    <select id="font-size-select" class="setting-control">
+                        <option value="small">Petit</option>
+                        <option value="medium">Normal</option>
+                        <option value="large">Grand</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="settings-section">
+                <h3>Compte</h3>
+                <div class="setting-item">
+                    <label>Pseudo</label>
+                    <input type="text" id="pseudo-input" class="setting-control">
+                </div>
+                <div class="setting-item">
+                    <label>Email</label>
+                    <input type="email" id="email-input" class="setting-control">
+                </div>
+            </div>
+            
+            <div class="settings-actions">
+                <button class="btn-primary" onclick="saveSettings()">Sauvegarder</button>
+                <button class="btn-danger" onclick="resetApp()">Réinitialiser</button>
+            </div>
+        </div>
+    </template>
+
+    <script src="assets/app.js"></script>
+    <script>
+        // Chargement automatique de l'app selon l'ID en paramètre
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const appId = urlParams.get('id');
+            
+            if (!appId) {
+                window.location.href = 'main.html';
+                return;
+            }
+            
+            loadApp(appId);
+        });
+        
+        function goBack() {
+            window.location.href = 'main.html';
+        }
+    </script>
+</body>
+</html>

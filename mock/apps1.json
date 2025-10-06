@@ -1,0 +1,44 @@
+{
+  "id": 1,
+  "name": "Quiz Réseaux",
+  "type": "quiz",
+  "theme_id": 1,
+  "background": "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+  "description": "Testez vos connaissances sur les réseaux sociaux et leur impact sur la société",
+  "questions": [
+    {
+      "id": 1,
+      "text": "Les réseaux sociaux montrent-ils la réalité ?",
+      "type": "vrai_faux",
+      "answer": "faux",
+      "explanation": "Les réseaux sociaux présentent souvent une version idéalisée et filtrée de la réalité. Les utilisateurs partagent généralement leurs meilleurs moments, créant une distorsion de la réalité quotidienne."
+    },
+    {
+      "id": 2,
+      "text": "Instagram influence-t-il l'image de soi ?",
+      "type": "vrai_faux",
+      "answer": "vrai",
+      "explanation": "De nombreuses études montrent que l'utilisation d'Instagram peut affecter l'estime de soi, particulièrement chez les jeunes, à travers la comparaison sociale et les standards de beauté irréalistes."
+    },
+    {
+      "id": 3,
+      "text": "Quelle est la principale cause des 'fake news' sur les réseaux sociaux ?",
+      "type": "qcm",
+      "choices": [
+        "Les algorithmes",
+        "La rapidité de partage",
+        "Le manque de vérification",
+        "Toutes les réponses"
+      ],
+      "answer": "Toutes les réponses",
+      "explanation": "Les fake news prolifèrent à cause de plusieurs facteurs : les algorithmes qui privilégient l'engagement, la rapidité de partage sans vérification, et l'absence de contrôle systématique des informations."
+    },
+    {
+      "id": 4,
+      "text": "Les 'influenceurs' ont-ils une responsabilité sociale ?",
+      "type": "vrai_faux",
+      "answer": "vrai",
+      "explanation": "Avec leur large audience, les influenceurs ont un impact significatif sur les opinions et comportements de leurs followers, ce qui implique une responsabilité dans leurs messages et recommandations."
+    }
+  ]
+}

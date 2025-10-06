@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workshop Mobile App</title>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+    <!-- Status Bar Mobile -->
+    <div class="status-bar">
+        <span class="time" id="statusTime">14:00</span>
+        <div class="status-right">
+            <span class="signal">●●●●</span>
+            <span class="wifi">📶</span>
+            <span class="battery">87%</span>
+        </div>
+    </div>
+
+    <!-- Écran de verrouillage -->
+    <div id="lock-screen" class="screen active">
+        <div class="lock-background">
+            <div class="lock-content">
+                <div class="time-display">
+                    <div class="lock-time" id="lockTime">14:00</div>
+                    <div class="lock-date" id="lockDate">Lundi 6 octobre</div>
+                </div>
+                
+                <div class="unlock-section">
+                    <div class="unlock-indicator"></div>
+                    <p class="unlock-text">Balayez vers le haut pour déverrouiller</p>
+                    <button class="unlock-btn" onclick="showRegistration()">
+                        <span class="unlock-icon">🔓</span>
+                        Déverrouiller
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Formulaire d'inscription -->
+        <div id="registration-form" class="registration-modal hidden">
+            <div class="modal-backdrop" onclick="hideRegistration()"></div>
+            <div class="modal-content">
+                <h2>Bienvenue</h2>
+                <p>Remplissez vos informations pour continuer</p>
+                
+                <form id="userForm" onsubmit="registerUser(event)">
+                    <div class="form-group">
+                        <label class="form-label" for="pseudo">Pseudo</label>
+                        <input type="text" id="pseudo" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="email">Email</label>
+                        <input type="email" id="email" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="age">Âge</label>
+                        <input type="number" id="age" class="form-control" min="13" max="100" required>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary">Continuer</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/app.js"></script>
+</body>
+</html>

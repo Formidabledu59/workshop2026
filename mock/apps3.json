@@ -1,0 +1,7 @@
+{
+  "id": 3,
+  "name": "Paramètres",
+  "type": "settings",
+  "description": "Personnalisez votre expérience utilisateur",
+  "redirect_to": "settings.html"
+}

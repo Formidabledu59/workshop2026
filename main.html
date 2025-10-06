@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apps - Workshop</title>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+    <!-- Status Bar Mobile -->
+    <div class="status-bar">
+        <span class="time" id="statusTime">14:00</span>
+        <div class="status-right">
+            <span class="signal">●●●●</span>
+            <span class="wifi">📶</span>
+            <span class="battery">87%</span>
+        </div>
+    </div>
+
+    <!-- Écran principal -->
+    <div class="main-screen">
+        <!-- Header -->
+        <div class="main-header">
+            <div class="user-info" id="userInfo">
+                <span class="user-pseudo"></span>
+            </div>
+            <h1>Mes Applications</h1>
+        </div>
+
+        <!-- Loading state -->
+        <div id="loading" class="loading-state">
+            <div class="spinner"></div>
+            <p>Chargement des applications...</p>
+        </div>
+
+        <!-- Apps grid -->
+        <div id="apps-grid" class="apps-grid hidden">
+            <!-- Apps seront générées dynamiquement -->
+        </div>
+
+        <!-- Error state -->
+        <div id="error-state" class="error-state hidden">
+            <div class="error-icon">⚠️</div>
+            <p>Impossible de charger les applications</p>
+            <button onclick="loadApps()" class="retry-btn">Réessayer</button>
+        </div>
+    </div>
+
+    <script src="assets/app.js"></script>
+    <script>
+        // Chargement automatique des apps au load de la page
+        document.addEventListener('DOMContentLoaded', () => {
+            // Vérifier si l'utilisateur est connecté
+            const userData = JSON.parse(localStorage.getItem('userData') || '{}');
+            if (!userData.pseudo) {
+                window.location.href = 'index.html';
+                return;
+            }
+            
+            // Afficher info utilisateur
+            document.querySelector('.user-pseudo').textContent = userData.pseudo;
+            
+            // Charger les apps
+            loadApps();
+        });
+    </script>
+</body>
+</html>

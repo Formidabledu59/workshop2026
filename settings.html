@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paramètres - Workshop</title>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+    <!-- Status Bar Mobile -->
+    <div class="status-bar">
+        <span class="time" id="statusTime">14:00</span>
+        <div class="status-right">
+            <span class="signal">●●●●</span>
+            <span class="wifi">📶</span>
+            <span class="battery">87%</span>
+        </div>
+    </div>
+
+    <!-- Navigation header -->
+    <div class="app-header">
+        <button class="back-btn" onclick="window.location.href='main.html'">
+            <span class="back-icon">←</span>
+            Retour
+        </button>
+        <h1>Paramètres</h1>
+    </div>
+
+    <!-- Settings content -->
+    <div class="settings-content">
+        <!-- Section Apparence -->
+        <div class="settings-section">
+            <h3 class="section-title">🎨 Apparence</h3>
+            
+            <div class="setting-item">
+                <div class="setting-label">
+                    <span>Thème</span>
+                    <small>Choisissez l'apparence de l'application</small>
+                </div>
+                <select id="theme-select" class="setting-control" onchange="changeTheme()">
+                    <option value="light">🌞 Clair</option>
+                    <option value="dark">🌙 Sombre</option>
+                    <option value="purple">💜 Violet</option>
+                    <option value="blue">💙 Bleu</option>
+                </select>
+            </div>
+            
+            <div class="setting-item">
+                <div class="setting-label">
+                    <span>Taille de police</span>
+                    <small>Ajustez la taille du texte</small>
+                </div>
+                <select id="font-size-select" class="setting-control" onchange="changeFontSize()">
+                    <option value="small">Petit (14px)</option>
+                    <option value="medium">Normal (16px)</option>
+                    <option value="large">Grand (18px)</option>
+                    <option value="xlarge">Très grand (20px)</option>
+                </select>
+            </div>
+            
+            <div class="setting-item">
+                <div class="setting-label">
+                    <span>Fond d'écran</span>
+                    <small>Personnalisez le fond de l'application</small>
+                </div>
+                <select id="background-select" class="setting-control" onchange="changeBackground()">
+                    <option value="gradient1">Dégradé bleu</option>
+                    <option value="gradient2">Dégradé violet</option>
+                    <option value="gradient3">Dégradé rose</option>
+                    <option value="solid">Couleur unie</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Section Compte -->
+        <div class="settings-section">
+            <h3 class="section-title">👤 Mon Compte</h3>
+            
+            <div class="setting-item">
+                <div class="setting-label">
+                    <span>Pseudo</span>
+                    <small>Votre nom d'utilisateur</small>
+                </div>
+                <input type="text" id="pseudo-input" class="setting-control" placeholder="Votre pseudo">
+            </div>
+            
+            <div class="setting-item">
+                <div class="setting-label">
+                    <span>Email</span>
+                    <small>Votre adresse email</small>
+                </div>
+                <input type="email" id="email-input" class="setting-control" placeholder="votre.email@example.com">
+            </div>
+            
+            <div class="setting-item">
+                <div class="setting-label">
+                    <span>Âge</span>
+                    <small>Votre âge</small>
+                </div>
+                <input type="number" id="age-input" class="setting-control" min="13" max="100">
+            </div>
+        </div>
+
+        <!-- Section Notifications -->
+        <div class="settings-section">
+            <h3 class="section-title">🔔 Notifications</h3>
+            
+            <div class="setting-item">
+                <div class="setting-label">
+                    <span>Notifications push</span>
+                    <small>Recevoir des notifications</small>
+                </div>
+                <div class="toggle-switch">
+                    <input type="checkbox" id="notifications-toggle" onchange="toggleNotifications()">
+                    <label for="notifications-toggle"></label>
+                </div>
+            </div>
+            
+            <div class="setting-item">
+                <div class="setting-label">
+                    <span>Sons</span>
+                    <small>Sons des interactions</small>
+                </div>
+                <div class="toggle-switch">
+                    <input type="checkbox" id="sounds-toggle" onchange="toggleSounds()">
+                    <label for="sounds-toggle"></label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="settings-actions">
+            <button class="btn-primary" onclick="saveSettings()">
+                💾 Sauvegarder les modifications
+            </button>
+            <button class="btn-secondary" onclick="exportData()">
+                📤 Exporter mes données
+            </button>
+            <button class="btn-danger" onclick="resetApp()">
+                🗑️ Réinitialiser l'application
+            </button>
+        </div>
+
+        <!-- Footer -->
+        <div class="settings-footer">
+            <p>Workshop Mobile App v1.0</p>
+            <p><small>Développé pour le workshop M1 2025-2026</small></p>
+        </div>
+    </div>
+
+    <script src="assets/app.js"></script>
+    <script>
+        // Charger les paramètres au chargement de la page
+        document.addEventListener('DOMContentLoaded', () => {
+            loadSettings();
+            updateTime();
+            setInterval(updateTime, 1000);
+        });
+    </script>
+</body>
+</html>
