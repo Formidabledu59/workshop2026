@@ -1,7 +1,7 @@
 ## Auteurs et pages GitHub :
 Ayoub FATHALLAH : https://github.com/Formidabledu59  
 Théo Dancoiosne : https://github.com/Theo-Dancoisne  
-Remi DESCAMPS : ?  
+Remi DESCAMPS : https://github.com/rere1208
 Julien MERIEL : ?  
 
 
