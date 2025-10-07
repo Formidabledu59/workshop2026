@@ -1,0 +1,23 @@
+#unlock-btnNew {
+  -webkit-appearance: none;
+  appearance: none;
+  background: none;
+  transform: rotate(-90deg);
+  width: 60vh;
+}
+#unlock-btnNew::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  color: white;
+  cursor: pointer;
+}
+#listOfNames {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+}
