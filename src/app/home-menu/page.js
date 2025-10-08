@@ -49,7 +49,7 @@ export default function HomeMenu() {
                 background: app.background_url
               }
             }
-            href={app.type === "settings" ? "/workshop2026/settings" : `/workshop2026/app_${app.id}`}
+            href={app.type === "settings" ? "/workshop2026/settings" : `/workshop2026/application/${app.id}`}
           >
             <div className="app-icon">
               {isHttp(app.icon) || isBase64(app.icon) ? (
