@@ -1,12 +1,13 @@
 'use client'
 
 import Image from "next/image";
+import { useRouter } from 'next/navigation';
 import "@/app/home-menu/page.css";
 import { showElement, hideElement } from "@/utils/helpers.js"
 import { useEffect, useState } from "react";
- 
 
 export default function HomeMenu() {
+  const router = useRouter();
   const [apps, setApps] = useState([]);
 
   useEffect(() => {
@@ -18,28 +19,29 @@ export default function HomeMenu() {
   const isHttp = (url) => /^https?:\/\/[^\s]+$/.test(url);
   const isBase64 = (data) => /^data:image\/[a-zA-Z]+;base64,[A-Za-z0-9+/=]+$/.test(data);
 
+  const handleAppClick = (app) => {
+    console.log('🎯 App cliquée:', app);
+    
+    if (app.type === "quiz") {
+      router.push(`/quiz/${app.id}`);
+    } else if (app.type === "settings") {
+      router.push('/settings');
+    } else {
+      console.log('Type app non géré:', app.type);
+    }
+  };
+
   return (
-    // Écran principal
     <div className="main-screen">
-      {/* Header */}
       <div className="main-header">
         <div className="user-info" id="userInfo">
-          {/* can put things like game progress (.e.g "4/10 apps unlocked!") */}
         </div>
         <h1>Mes Applications</h1>
       </div>
 
-      {/* Loading state */}
-      {/* <div id="loading" className="loading-state">
-        <div className="spinner"></div>
-        <p>Chargement des applications...</p>
-      </div> */}
-
-      {/* Apps grid */}
       <div id="apps-grid" className="apps-grid">
-        {/* Apps seront générées dynamiquement */}
         {apps.map(app => (
-          <a
+          <div // ❌ Change <a> en <div>
             key={app.id}
             className="app-card"
             style={
@@ -49,7 +51,7 @@ export default function HomeMenu() {
                 background: app.background_url
               }
             }
-            href={app.type === "settings" ? "/workshop2026/settings" : `/workshop2026/app_${app.id}`}
+            onClick={() => handleAppClick(app)}
           >
             <div className="app-icon">
               {isHttp(app.icon) || isBase64(app.icon) ? (
@@ -58,23 +60,20 @@ export default function HomeMenu() {
                 <span>{app.icon}</span>
               )} 
             </div>
-          </a>
+          </div>
         ))}
       </div>
 
-      {/* Error state */}
       <div id="error-state" className="error-state hidden">
         <div className="error-icon">⚠️</div>
         <p>Impossible de charger les applications</p>
-        {/* <button onclick="loadApps()" className="retry-btn">Réessayer</button> */}
       </div>
     </div>
   );
 }
-async function fetchApps() {
-  const response = await fetch("https://workshop2526.alwaysdata.net/api/apps");           // Real API
-  // const response = await fetch("/workshop2026/mock/apps.json");         // Mock
 
+async function fetchApps() {
+  const response = await fetch("https://workshop2526.alwaysdata.net/api/apps");
   if (response.ok) return await response.json();
   else return {error: "pas de données"};
 }
