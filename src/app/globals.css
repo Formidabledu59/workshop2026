@@ -352,8 +352,9 @@ html, body {
 .main-screen {
   padding-top: 44px;
   min-height: 100vh;
-  /* background: var(--color-background); */
-  background-image: url("/workshop2026/wallpapers/undertale.jpg");
+  /*
+    Mettre background-color/background-image directement sur la page concernée
+  */
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
