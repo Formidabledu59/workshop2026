@@ -1,7 +1,10 @@
 'use client'
 
+import Image from "next/image";
+import "@/app/home-menu/page.css";
 import { showElement, hideElement } from "@/utils/helpers.js"
 import { useEffect, useState } from "react";
+ 
 
 export default function HomeMenu() {
   const [apps, setApps] = useState([]);
@@ -11,6 +14,9 @@ export default function HomeMenu() {
       setApps(data.apps);
     });
   }, []);
+
+  const isHttp = (url) => /^https?:\/\/[^\s]+$/.test(url);
+  const isBase64 = (data) => /^data:image\/[a-zA-Z]+;base64,[A-Za-z0-9+/=]+$/.test(data);
 
   return (
     // Écran principal
@@ -36,12 +42,22 @@ export default function HomeMenu() {
           <a
             key={app.id}
             className="app-card"
-            style={{borderTop: `4px solid ${app.color}`}}
+            style={
+              isHttp(app.background_url) || isBase64(app.background_url) ? {
+                backgroundImage: `url(${app.background_url})`
+              } : {
+                background: app.background_url
+              }
+            }
             href={app.type === "settings" ? "/workshop2026/settings" : `/workshop2026/app_${app.id}`}
           >
-            <div className="app-icon" style={{color: app.color}}>{app.icon}</div>
-            <div className="app-name">{app.name}</div>
-            <div className="app-description">{app.description || ""}</div>
+            <div className="app-icon">
+              {isHttp(app.icon) || isBase64(app.icon) ? (
+                <Image src={app.icon} fill={true} alt={`${app.name} app icon`} />
+              ) : (
+                <span>{app.icon}</span>
+              )} 
+            </div>
           </a>
         ))}
       </div>
@@ -56,64 +72,9 @@ export default function HomeMenu() {
   );
 }
 async function fetchApps() {
-  // const response = await fetch("endpoint to app");           // Real API
-  const response = await fetch("/workshop2026/mock/apps.json");         // Mock
+  const response = await fetch("https://workshop2526.alwaysdata.net/api/apps");           // Real API
+  // const response = await fetch("/workshop2026/mock/apps.json");         // Mock
 
   if (response.ok) return await response.json();
   else return {error: "pas de données"};
-}
-
-async function loadApps() {
-  // Reset states
-  showElement('loading');
-  hideElement('apps-grid');
-  hideElement('error-state');
-
-  try {
-    const data = await fetchApps();
-
-    // Générer la grille d'apps
-    generateAppsGrid(data.apps);
-
-    hideElement('loading');
-    showElement('apps-grid');
-
-  } catch (error) {
-    console.error('❌ Erreur lors du chargement:', error);
-    hideElement('loading');
-    showElement('error-state');
-  }
-}
-
-function generateAppsGrid(apps) {
-  const gridEl = document.getElementById('apps-grid');
-  if (!gridEl) return;
-
-  gridEl.innerHTML = '';
-
-  apps.forEach(app => {
-    const appCard = createAppCard(app);
-    gridEl.appendChild(appCard);
-  });
-}
-
-function createAppCard(app) {
-  const card = document.createElement('a');
-  card.className = 'app-card';
-  card.style.borderTop = `4px solid ${app.color}`;
-
-  // Navigation selon le type d'app
-  if (app.type === 'settings') {
-    card.href = 'settings.html';
-  } else {
-    card.href = `app.html?id=${app.id}`;
-  }
-
-  card.innerHTML = `
-    <div class="app-icon" style="color: ${app.color}">${app.icon}</div>
-    <div class="app-name">${app.name}</div>
-    <div class="app-description">${app.description || ''}</div>
-  `;
-
-  return card;
 }

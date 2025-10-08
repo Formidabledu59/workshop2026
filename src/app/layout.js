@@ -1,6 +1,5 @@
 'use client'
 
-// import "/workshop2026/app/globals.css";
 import "./globals.css";
 import { useEffect } from "react";
 

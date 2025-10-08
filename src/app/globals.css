@@ -48,7 +48,8 @@
   /* Shadows */
   --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
   --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.15);
-  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.2);
+  --shadow-lg: 0 8px 16px rgba(255, 255, 255, 0.29);
+  /* --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.466); */
 }
 
 /* Dark Theme */
@@ -126,7 +127,7 @@ html, body {
   padding: 0 var(--spacing-md);
   font-size: var(--font-size-sm);
   font-weight: 600;
-  color: var(--color-text);
+  color: white;
   z-index: 1000;
 }
 
@@ -351,12 +352,17 @@ html, body {
 .main-screen {
   padding-top: 44px;
   min-height: 100vh;
-  background: var(--color-background);
+  /* background: var(--color-background); */
+  background-image: url("/workshop2026/wallpapers/undertale.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .main-header {
   padding: var(--spacing-lg) var(--spacing-lg) var(--spacing-md);
   text-align: center;
+  color: white;
 }
 
 .user-info {
@@ -369,6 +375,7 @@ html, body {
   font-size: var(--font-size-2xl);
   font-weight: 700;
   margin-bottom: var(--spacing-lg);
+  -webkit-text-stroke: black 0.2px;
 }
 
 /* ==========================================================================
@@ -405,71 +412,6 @@ html, body {
   margin-bottom: var(--spacing-lg);
 }
 
-/* ==========================================================================
-   APPS GRID
-   ========================================================================== */
-
-.apps-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: var(--spacing-lg);
-  padding: var(--spacing-lg);
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.app-card {
-  background: var(--color-surface);
-  border-radius: var(--radius-lg);
-  padding: var(--spacing-lg);
-  text-align: center;
-  box-shadow: var(--shadow-sm);
-  transition: all 0.3s ease;
-  cursor: pointer;
-  text-decoration: none;
-  color: var(--color-text);
-  position: relative;
-  overflow: hidden;
-}
-
-.app-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
-}
-
-.app-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: var(--color-primary);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.app-card:hover::before {
-  opacity: 1;
-}
-
-.app-icon {
-  font-size: 3rem;
-  margin-bottom: var(--spacing-md);
-  display: block;
-}
-
-.app-name {
-  font-size: var(--font-size-base);
-  font-weight: 600;
-  margin-bottom: var(--spacing-xs);
-}
-
-.app-description {
-  font-size: var(--font-size-sm);
-  color: var(--color-text-secondary);
-  line-height: 1.4;
-}
 
 /* ==========================================================================
    APP HEADER
@@ -772,20 +714,6 @@ html, body {
    ========================================================================== */
 
 @media (max-width: 768px) {
-  .apps-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--spacing-md);
-    padding: var(--spacing-md);
-  }
-
-  .app-card {
-    padding: var(--spacing-md);
-  }
-
-  .app-icon {
-    font-size: 2.5rem;
-  }
-
   .setting-item {
     flex-direction: column;
     align-items: flex-start;
@@ -805,10 +733,6 @@ html, body {
   .modal-content {
     margin: var(--spacing-md);
     padding: var(--spacing-lg);
-  }
-
-  .apps-grid {
-    grid-template-columns: repeat(2, 1fr);
   }
 }
 
