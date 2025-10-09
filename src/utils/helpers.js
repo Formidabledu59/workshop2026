@@ -19,3 +19,7 @@ export function hideElement(id) {
 export const selctTxt = (htmlElement) => {
     htmlElement.target.select();
 }
+
+export const routeExceptions = ["settings", "info"];
+export const scoreExceptions = ["settings", "info"];
+

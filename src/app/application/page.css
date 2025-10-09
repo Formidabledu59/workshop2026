@@ -1,3 +1,48 @@
+
+/* Toast container */
+.toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  color: black;
+  padding: 8px 16px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+  white-space: nowrap;
+  animation: popUpToast 2s ease-out forwards;
+  z-index: 9999;
+}
+
+/* Pop-up animation */
+@keyframes popUpToast {
+  0% {
+    transform: translateX(-50%) translateY(20px);
+    opacity: 0;
+  }
+  10% {
+    transform: translateX(-50%) translateY(-10px);
+    opacity: 1;
+  }
+  90% {
+    transform: translateX(-50%) translateY(-10px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-50%) translateY(20px);
+    opacity: 0;
+  }
+}
+
+.toastColorizedTxt {
+  background: linear-gradient(76.9deg, rgba(255,90,90,1) 27.2%, rgba(130,5,255,1) 79.9%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
 /* ============================================
    DIGITAL DETOX QUIZ - DESIGN COMPLET OPTIMISÉ
 ============================================ */

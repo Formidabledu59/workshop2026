@@ -2,16 +2,28 @@
 
 import Image from "next/image";
 import "@/app/home-menu/page.css";
-import { showElement, hideElement } from "@/utils/helpers.js"
+import { routeExceptions, scoreExceptions } from "@/utils/helpers.js"
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
 
 export default function HomeMenu() {
   const [apps, setApps] = useState([]);
+  const [scores, setScores] = useState({});
 
   useEffect(() => {
     fetchApps().then((data) => {
+      if(!localStorage.getItem("scores")) {
+        // Then it's a "new game"
+        // apps state: lock = 0, unlock = 1, done = 2
+        let scores = Object.fromEntries(data.apps.map(app => [app.id, {score: 0, state: 0}]));
+        scores[1].state = 1;
+        localStorage.setItem("scores", JSON.stringify(scores));
+        setScores(scores);
+      }
+      else {
+        setScores(JSON.parse(localStorage.getItem("scores")));
+      }
       setApps(data.apps);
     });
   }, []);
@@ -50,19 +62,19 @@ export default function HomeMenu() {
                 background: app.iconBackground
               }
             }
-            href={
-              app.type === "stats" ? "/stats"
-                : app.type === "settings" ? "/settings"
-                  : app.type === "info" ? "/info"
-                    : `/application/${app.id}`
-            }
+            href={routeExceptions.includes(app.type) ? `/${app.type}` : `/application/${app.id}`}
           >
             <div className="app-icon">
               {isHttp(app.iconIcon) || isBase64(app.iconIcon) ? (
                 <Image src={app.iconIcon} fill={true} alt={`${app.name} app icon`} />
               ) : (
                 <span>{app.iconIcon}</span>
-              )}
+              )} 
+              <div className={[
+                "badge",
+                scores[app.id].state === 1 || scoreExceptions.includes(app.type) ? "" : scores[app.id].state === 0 ? "badgeDemon" : "badgeCheck"
+              ].join(" ")}>
+              </div>
             </div>
           </Link>
         ))}

@@ -59,3 +59,23 @@
     grid-template-columns: repeat(4, 1fr);
   }
 }
+
+.badge {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 25px;
+  height: 25px;
+}
+
+.badgeCheck {
+  background-image: url("/workshop2026/check.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.badgeDemon {
+  background-image: url("/workshop2026/demon.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
