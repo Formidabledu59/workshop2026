@@ -20,7 +20,7 @@ export default function RootLayout({ children }) {
 
 
   return (
-    <html lang="en">
+    <html lang="fr">
       <body>
         {/* Status Bar Mobile */}
         <div className="status-bar">

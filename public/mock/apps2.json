@@ -1,56 +1,59 @@
 {
-  "id": 2,
-  "name": "Quiz Culture",
-  "type": "quiz",
-  "theme_id": 2,
-  "background": "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
-  "description": "Découvrez la culture française et les dispositifs culturels",
-  "questions": [
-    {
-      "id": 1,
-      "text": "Le Pass Culture dépend de quel ministère ?",
-      "type": "qcm",
-      "choices": [
-        "Ministère de la Culture",
-        "Ministère de l'Éducation",
-        "Ministère des Sports",
-        "Ministère de la Jeunesse"
-      ],
-      "answer": "Ministère de la Culture",
-      "explanation": "Le Pass Culture est une initiative du Ministère de la Culture pour faciliter l'accès des jeunes aux activités culturelles."
-    },
-    {
-      "id": 2,
-      "text": "Le Pass Culture est accessible dès quel âge ?",
-      "type": "qcm",
-      "choices": [
-        "15 ans",
-        "18 ans",
-        "21 ans",
-        "16 ans"
-      ],
-      "answer": "18 ans",
-      "explanation": "Le Pass Culture est accessible aux jeunes de 18 ans résidant en France, avec un crédit de 300€ à dépenser en activités culturelles."
-    },
-    {
-      "id": 3,
-      "text": "Combien d'argent est crédité sur le Pass Culture ?",
-      "type": "qcm",
-      "choices": [
-        "200€",
-        "300€",
-        "400€",
-        "500€"
-      ],
-      "answer": "300€",
-      "explanation": "Chaque bénéficiaire du Pass Culture reçoit 300€ à dépenser sur 24 mois en biens et services culturels."
-    },
-    {
-      "id": 4,
-      "text": "Peut-on acheter des livres avec le Pass Culture ?",
-      "type": "vrai_faux",
-      "answer": "vrai",
-      "explanation": "Le Pass Culture permet d'acheter des livres, mais avec une limite : maximum 100€ peuvent être dépensés en biens physiques comme les livres."
-    }
-  ]
+  "app": {
+    "id": 2,
+    "name": "Quiz Culture",
+    "type": "quiz",
+    "theme_id": 2,
+    "color": "#F5A623",
+    "background": "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
+    "description": "Découvrez la culture française et les dispositifs culturels",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Le Pass Culture dépend de quel ministère ?",
+        "type": "qcm",
+        "choices": [
+          "Ministère de la Culture",
+          "Ministère de l'Éducation",
+          "Ministère des Sports",
+          "Ministère de la Jeunesse"
+        ],
+        "answer": "Ministère de la Culture",
+        "explanation": "Le Pass Culture est une initiative du Ministère de la Culture pour faciliter l'accès des jeunes aux activités culturelles."
+      },
+      {
+        "id": 2,
+        "text": "Le Pass Culture est accessible dès quel âge ?",
+        "type": "qcm",
+        "choices": [
+          "15 ans",
+          "18 ans",
+          "21 ans",
+          "16 ans"
+        ],
+        "answer": "18 ans",
+        "explanation": "Le Pass Culture est accessible aux jeunes de 18 ans résidant en France, avec un crédit de 300€ à dépenser en activités culturelles."
+      },
+      {
+        "id": 3,
+        "text": "Combien d'argent est crédité sur le Pass Culture ?",
+        "type": "qcm",
+        "choices": [
+          "200€",
+          "300€",
+          "400€",
+          "500€"
+        ],
+        "answer": "300€",
+        "explanation": "Chaque bénéficiaire du Pass Culture reçoit 300€ à dépenser sur 24 mois en biens et services culturels."
+      },
+      {
+        "id": 4,
+        "text": "Peut-on acheter des livres avec le Pass Culture ?",
+        "type": "vrai_faux",
+        "answer": "vrai",
+        "explanation": "Le Pass Culture permet d'acheter des livres, mais avec une limite : maximum 100€ peuvent être dépensés en biens physiques comme les livres."
+      }
+    ]
+  }
 }

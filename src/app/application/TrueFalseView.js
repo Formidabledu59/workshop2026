@@ -7,25 +7,24 @@ export default function TrueFalseView({ question, nextQuest }) {
   const answer = question.answer === "vrai" ? true : false;       // string to boolean
   var status = (<></>);
   
-  console.log(guess);
   
   if (typeof guess !== "undefined" && typeof guess !== null) {
-    let message;
+    let glitter;
     if (guess === answer) {
-      message = (
+      glitter = (
         <div>oui</div>
       );
     }
     else {
-      message = (
+      glitter = (
         <div>non</div>
       );
     }
     status = (
       <div>
-        {message}
+        {glitter}
         <p>{question.explanation}</p>
-        <button onClick={() => nextQuest()}>Ok</button>
+        <button onClick={() => nextQuest()}>{guess === answer ? "Suivant" : "Ok"}</button>
       </div>
     );
   }
@@ -38,7 +37,6 @@ export default function TrueFalseView({ question, nextQuest }) {
         <button onClick={() => setGuess(false)} disabled={typeof guess == "boolean"}>Faux</button>
       </div>
       {status}
-      {/* <button onClick={() => nextQuest()}>next</button> */}
     </div>
   );
 }

@@ -2,10 +2,12 @@
 
 import "@/app/page.css";
 import { showElement, hideElement, selctTxt } from "@/utils/helpers.js"
+import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 
 export default function Home() {
+  const router = useRouter();
   const [grpName, setGrpName] = useState("");
   const playerNb_min = 1;
   const playerNb_max = 4;
@@ -38,6 +40,33 @@ export default function Home() {
       else return item;
     });
     setListOfNames(nextList);
+  }
+
+  function registerUser(event) {
+    event.preventDefault();
+
+
+    let listOfNames = [...document.getElementById("listOfNames").getElementsByTagName("input")];
+    listOfNames = listOfNames.map(input => input.value);
+    
+    const formData = new FormData(event.target);
+    const userData = {
+      grp_name: formData.get('grp_name') || document.getElementById('grp_name').value,        // bdd + local
+      player_nb: formData.get('player_nb') || document.getElementById('player_nb').value,     // local
+      player_names: listOfNames                                                               // local
+    };
+
+    // Validation simple
+    // registration en bdd
+
+    // Sauvegarder en localStorage
+    saveUserData(userData);
+
+    // Redirection vers main.html
+    setTimeout(() => {
+      // window.location.href = "/workshop2026/home-menu";
+      router.push("/home-menu");
+    }, 1000);
   }
 
   return (
@@ -130,33 +159,6 @@ function hideRegistration() {
   hideElement('registration-form');
 }
 
-function registerUser(event) {
-  event.preventDefault();
-
-
-  let listOfNames = [...document.getElementById("listOfNames").getElementsByTagName("input")];
-  listOfNames = listOfNames.map(input => input.value);
-  
-  const formData = new FormData(event.target);
-  const userData = {
-    grp_name: formData.get('grp_name') || document.getElementById('grp_name').value,        // bdd + local
-    player_nb: formData.get('player_nb') || document.getElementById('player_nb').value,     // local
-    player_names: listOfNames                                                               // local
-  };
-
-  // Validation simple
-  // registration en bdd
-
-
-  // Sauvegarder en localStorage
-  saveUserData(userData);
-
-  // Redirection vers main.html
-  setTimeout(() => {
-    window.location.href = "/workshop2026/home-menu";
-    // window.location.href = 'main.html';
-  }, 1000);
-}
 
 function saveUserData(userData) {
   localStorage.setItem('userData', JSON.stringify(userData));

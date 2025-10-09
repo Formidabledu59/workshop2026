@@ -1,4 +1,4 @@
-import AppView from "./AppView";
+import AppView from "../AppView";
 
 // Return a list of `params` to populate the [slug] dynamic segment
 export async function generateStaticParams() {

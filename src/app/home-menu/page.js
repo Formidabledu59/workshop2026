@@ -4,6 +4,7 @@ import Image from "next/image";
 import "@/app/home-menu/page.css";
 import { showElement, hideElement } from "@/utils/helpers.js"
 import { useEffect, useState } from "react";
+import Link from "next/link";
  
 
 export default function HomeMenu() {
@@ -20,7 +21,7 @@ export default function HomeMenu() {
 
   return (
     // Écran principal
-    <div className="main-screen" style={{backgroundImage: "url(/workshop2026/wallpapers/undertale.jpg)"}}>
+    <div className="main-screen" style={{backgroundImage: "url(./wallpapers/undertale.jpg)"}}>
       {/* Header */}
       <div className="main-header">
         <div className="user-info" id="userInfo">
@@ -39,26 +40,26 @@ export default function HomeMenu() {
       <div id="apps-grid" className="apps-grid">
         {/* Apps seront générées dynamiquement */}
         {apps.map(app => (
-          <a
+          <Link
             key={app.id}
             className="app-card"
             style={
-              isHttp(app.background_url) || isBase64(app.background_url) ? {
-                backgroundImage: `url(${app.background_url})`
+              isHttp(app.iconBackground) || isBase64(app.iconBackground) ? {
+                backgroundImage: `url(${app.iconBackground})`
               } : {
-                background: app.background_url
+                background: app.iconBackground
               }
             }
-            href={app.type === "settings" ? "/workshop2026/settings" : `/workshop2026/application/${app.id}`}
+            href={app.type === "settings" ? "/settings" : `/application/${app.id}`}
           >
             <div className="app-icon">
-              {isHttp(app.icon) || isBase64(app.icon) ? (
-                <Image src={app.icon} fill={true} alt={`${app.name} app icon`} />
+              {isHttp(app.iconIcon) || isBase64(app.iconIcon) ? (
+                <Image src={app.iconIcon} fill={true} alt={`${app.name} app icon`} />
               ) : (
-                <span>{app.icon}</span>
+                <span>{app.iconIcon}</span>
               )} 
             </div>
-          </a>
+          </Link>
         ))}
       </div>
 
@@ -73,7 +74,7 @@ export default function HomeMenu() {
 }
 async function fetchApps() {
   const response = await fetch("https://workshop2526.alwaysdata.net/api/apps");           // Real API
-  // const response = await fetch("/workshop2026/mock/apps.json");         // Mock
+  // const response = await fetch("./mock/apps.json");         // Mock
 
   if (response.ok) return await response.json();
   else return {error: "pas de données"};
