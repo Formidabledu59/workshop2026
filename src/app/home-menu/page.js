@@ -5,7 +5,7 @@ import "@/app/home-menu/page.css";
 import { showElement, hideElement } from "@/utils/helpers.js"
 import { useEffect, useState } from "react";
 import Link from "next/link";
- 
+
 
 export default function HomeMenu() {
   const [apps, setApps] = useState([]);
@@ -21,7 +21,7 @@ export default function HomeMenu() {
 
   return (
     // Écran principal
-    <div className="main-screen" style={{backgroundImage: "url(./wallpapers/undertale.jpg)"}}>
+    <div className="main-screen" style={{ backgroundImage: "url(./wallpapers/undertale.jpg)" }}>
       {/* Header */}
       <div className="main-header">
         <div className="user-info" id="userInfo">
@@ -50,14 +50,19 @@ export default function HomeMenu() {
                 background: app.iconBackground
               }
             }
-            href={app.type === "settings" ? "/settings" : `/application/${app.id}`}
+            href={
+              app.type === "stats" ? "/stats"
+                : app.type === "settings" ? "/settings"
+                  : app.type === "info" ? "/info"
+                    : `/application/${app.id}`
+            }
           >
             <div className="app-icon">
               {isHttp(app.iconIcon) || isBase64(app.iconIcon) ? (
                 <Image src={app.iconIcon} fill={true} alt={`${app.name} app icon`} />
               ) : (
                 <span>{app.iconIcon}</span>
-              )} 
+              )}
             </div>
           </Link>
         ))}
@@ -77,5 +82,5 @@ async function fetchApps() {
   // const response = await fetch("./mock/apps.json");         // Mock
 
   if (response.ok) return await response.json();
-  else return {error: "pas de données"};
+  else return { error: "pas de données" };
 }
