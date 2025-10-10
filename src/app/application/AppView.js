@@ -150,78 +150,80 @@ export default function AppView({ id }) {
   // );
 
   return (
-    <div className="app-container">
-      {/* BOUTON RETOUR TOUJOURS AU-DESSUS */}
-      <div className="floating-back-btn">
-        <button onClick={() => window.history.back()} className="back-btn-floating">
-          ← Menu
-        </button>
-      </div>
+    <>
+      <div className="app-container">
+        {/* BOUTON RETOUR TOUJOURS AU-DESSUS */}
+        <div className="floating-back-btn">
+          <button onClick={() => window.history.back()} className="back-btn-floating">
+            ← Menu
+          </button>
+        </div>
 
-      {/* Header avec info de l'app */}
-      <div className="app-header">        
-        <div className="app-info">
-          <div className="app-icon-container">
-            {appIcon ? (
-              <img 
-                src={appIcon} 
-                alt={appData.name} 
-                className="app-icon-img"
-                onError={(e) => {
-                  e.target.style.display = 'none';
-                  e.target.nextElementSibling.style.display = 'flex';
+        {/* Header avec info de l'app */}
+        <div className="app-header">        
+          <div className="app-info">
+            <div className="app-icon-container">
+              {appIcon ? (
+                <img 
+                  src={appIcon} 
+                  alt={appData.name} 
+                  className="app-icon-img"
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                    e.target.nextElementSibling.style.display = 'flex';
+                  }}
+                />
+              ) : null}
+              <div 
+                className="app-icon-fallback" 
+                style={{ 
+                  background: appData.color || '#3b82f6',
+                  display: appIcon ? 'none' : 'flex'
                 }}
-              />
-            ) : null}
-            <div 
-              className="app-icon-fallback" 
-              style={{ 
-                background: appData.color || '#3b82f6',
-                display: appIcon ? 'none' : 'flex'
-              }}
-            >
-              {appData.name?.charAt(0) || '?'}
+              >
+                {appData.name?.charAt(0) || '?'}
+              </div>
+            </div>
+            
+            <div className="app-details">
+              <h1 className="app-title">{appData.name}</h1>
+              <p className="app-description">{appData.description}</p>
             </div>
           </div>
-          
-          <div className="app-details">
-            <h1 className="app-title">{appData.name}</h1>
-            <p className="app-description">{appData.description}</p>
+        </div>
+
+        {/* Progress Bar */}
+        <div className="progress-section">
+          <div className="progress-container">
+            <div className="progress-bar">
+              <div 
+                className="progress-fill" 
+                style={{ 
+                  width: `${((currQuestIndex + 1) / (appData.questions?.length || 1)) * 100}%` 
+                }}
+              ></div>
+            </div>
+            <div className="progress-text">
+              Question {currQuestIndex + 1} sur {appData.questions?.length || 0}
+            </div>
+            <div className="score-bubble">
+              <span className="score-current">{score}</span>
+              <span className="score-separator">/</span>
+              <span className="score-max">{getMaxScoreUpToNow() + (currQuestion.difficulty)}</span>
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Progress Bar */}
-      <div className="progress-section">
-        <div className="progress-container">
-          <div className="progress-bar">
-            <div 
-              className="progress-fill" 
-              style={{ 
-                width: `${((currQuestIndex + 1) / (appData.questions?.length || 1)) * 100}%` 
-              }}
-            ></div>
-          </div>
-          <div className="progress-text">
-            Question {currQuestIndex + 1} sur {appData.questions?.length || 0}
-          </div>
+        {/* Zone de la question */}
+        <div className="question-zone">
+          {questionComponent}
         </div>
-        <div className="score-bubble">
-          <span className="score-current">{score}</span>
-          <span className="score-separator">/</span>
-          <span className="score-max">{getMaxScoreUpToNow() + (currQuestion.difficulty)}</span>
-        </div>
-      </div>
 
-      {/* Zone de la question */}
-      <div className="question-zone">
-        {questionComponent}
       </div>
-
       {/* Toast joueur suivant */}
       {players ? (
         <NextPlayerToast key={currQuestIndex} player={players[0]} />
         ) : (null)}
-    </div>
+    </>
   );
 }

@@ -33,7 +33,7 @@ export default function HomeMenu() {
 
   return (
     // Écran principal
-    <div className="main-screen" style={{ backgroundImage: "url(./wallpapers/undertale.jpg)" }}>
+    <div className="main-screen" style={{ backgroundImage: "url(/workshop2026/wallpapers/undertale.jpg)" }}>
       {/* Header */}
       <div className="main-header">
         <div className="user-info" id="userInfo">

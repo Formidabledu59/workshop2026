@@ -176,7 +176,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 80px 20px 20px 20px; /* Padding top pour éviter le bouton flottant */
+  padding: 20px 20px 20px 20px; /* Padding top pour éviter le bouton flottant */
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -292,7 +292,7 @@
 /* =============== QUESTION ZONE =============== */
 .question-zone {
   flex: 1;
-  padding: 1.5rem;
+  padding: 1.5rem 1.5rem 0 1.5rem;
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -495,7 +495,6 @@
 /* =============== ACTION SECTION =============== */
 .action-section {
   text-align: center;
-  margin-bottom: 2rem;
 }
 
 .btn-validate {
