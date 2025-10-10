@@ -6,8 +6,10 @@ import TrueFalseView from "./TrueFalseView";
 import "@/app/application/page.css";
 import NextPlayerToast from "./NextPlayerToast";
 import { hasIconAsIcon } from "@/utils/helpers";
+import { useRouter } from "next/navigation";
 
 export default function AppView({ id }) {
+  const router = useRouter();
   const [appData, setAppData] = useState(null);
   const [currQuestIndex, setCurrQuestIndex] = useState(0);
   const [currQuestion, setCurrQuestion] = useState(null);
@@ -72,7 +74,8 @@ export default function AppView({ id }) {
   
   function nextQuestion(gotCorrctAnsw) {
     const points = gotCorrctAnsw ? (currQuestion.difficulty) : 0;
-    setScore(prevScore => prevScore + points);
+    const newScore = score + points;
+    setScore(newScore);
 
     const nextQuestIndex = currQuestIndex + 1;
 
@@ -88,7 +91,12 @@ export default function AppView({ id }) {
     }
     else {
       // end of app
-      alert("comportement pas encore implémenté: fin de l'app");
+      // alert("comportement pas encore implémenté: fin de l'app");
+      let scores = JSON.parse(localStorage.getItem("scores"));
+      scores[appData.id].score = newScore;
+      scores[appData.id].state = 2;
+      localStorage.setItem("scores", JSON.stringify(scores));
+      setTimeout(() => router.push("/home-menu"), 5000);
     }
   }
 

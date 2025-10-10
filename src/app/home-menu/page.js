@@ -10,6 +10,7 @@ import Link from "next/link";
 export default function HomeMenu() {
   const [apps, setApps] = useState([]);
   const [scores, setScores] = useState({});
+  const [showChat, setShowChat] = useState(false);
 
   useEffect(() => {
     fetchApps().then((data) => {
@@ -85,6 +86,30 @@ export default function HomeMenu() {
         <div className="error-icon">⚠️</div>
         <p>Impossible de charger les applications</p>
         {/* <button onclick="loadApps()" className="retry-btn">Réessayer</button> */}
+      </div>
+
+      {/* Chat */}
+      <div>
+        {/* Chat Button */}
+        <div id="chat-button" onClick={() => setShowChat(!showChat)}>
+          💬 Chat
+        </div>
+
+        {/* Chat Popup */}
+        {showChat && (
+          <div id="chat-popup">
+            <div className="chat-header">Chat with us</div>
+            <div className="chat-body">
+              <p>Hello! How can we help you today?</p>
+              {/* You can add input fields or chatbot integration here */}
+            </div>
+            <div className="chat-footer">
+              <input type="text" placeholder="Type your message..." />
+              <button>Send</button>
+            </div>
+          </div>
+        )}
+
       </div>
     </div>
   );
