@@ -2,22 +2,27 @@
 
 import { useEffect, useState } from "react";
 
+// export default function McqView({ 
+//   question, 
+//   nextQuest, 
+//   currentIndex,   // decommissioned
+//   totalQuestions, // decommissioned
+//   onAnswerSubmit,
+//   currentScore,   // decommissioned
+//   maxScoreUpTo    // decommissioned
+// }) {
 export default function McqView({ 
   question, 
   nextQuest, 
-  currentIndex, 
-  totalQuestions,
-  onAnswerSubmit,
-  currentScore,
-  maxScoreUpTo
 }) {
   const answer = [question.answer];
   const [inputs, setInputs] = useState(Object.fromEntries(
     question.choices.map(choice => [choice, false])
   ));
-  const [guess, setGuess] = useState(null);
+  const [guess, setGuess] = useState(null);     // decommissioned
   const [status, setStatus] = useState(null);
   const [isValidated, setIsValidated] = useState(false);
+
 
   const toggleInput = (input) => {
     if (isValidated) return;
@@ -35,19 +40,19 @@ export default function McqView({
       .filter(([key, value]) => value === true)
       .map(([key]) => key);
       
-    let isCorrect = answer.every((value, index) => value === userGuess[index]) && 
+    const isCorrect = answer.every((value, index) => value === userGuess[index]) && 
                     userGuess.length === answer.length;
 
-    setGuess(userGuess);
+    setGuess(userGuess);      // decommissioned
     setIsValidated(true);
     
     // Enregistrer la réponse et calculer le score
-    onAnswerSubmit(question.id, isCorrect);
+    // onAnswerSubmit(question.id, isCorrect);         //noooooo
     
     setStatus({
-      correct: isCorrect,
-      explanation: question.explanation,
-      correctAnswer: question.answer,
+      isCorrect: isCorrect,
+      explanation: question.explanation,    // decommissioned
+      correctAnswer: question.answer,       // decommissioned
       pointsEarned: isCorrect ? (question.difficulty) : 0
     });
   }
@@ -100,12 +105,12 @@ export default function McqView({
       </div>
 
       {status && (
-        <div className={`result-section ${status.correct ? 'correct' : 'incorrect'}`}>
+        <div className={`result-section ${status.isCorrect ? 'correct' : 'incorrect'}`}>
           <div className="result-header">
             <div className="result-icon">
-              {status.correct ? '🎉' : '😔'}
+              {status.isCorrect ? '🎉' : '😔'}
             </div>
-            <h3>{status.correct ? 'Correct !' : 'Incorrect'}</h3>
+            <h3>{status.isCorrect ? 'Correct !' : 'Incorrect'}</h3>
             <div className="points-earned">
               +{status.pointsEarned} points
             </div>
@@ -113,13 +118,18 @@ export default function McqView({
           
           <div className="explanation-box">
             <p><strong>Explication :</strong></p>
-            <p>{status.explanation}</p>
-            <p><strong>Bonne réponse :</strong> {status.correctAnswer}</p>
+            <p>{question.explanation}</p>
+            <p><strong>Bonne réponse :</strong> {question.answer}</p>
           </div>
           
           {/* BOUTON + SCORE EN BAS À DROITE */}
           <div className="bottom-actions">
-            <button onClick={nextQuest} className="btn-next">
+            <button onClick={() => nextQuest(status.isCorrect)} className="btn-next">
+              Question suivante →
+            </button>
+          </div>
+          {/* <div className="bottom-actions">
+            <button onClick={() => nextQuest(isCorrect)} className="btn-next">
               {currentIndex + 1 < totalQuestions ? 'Question suivante →' : 'Voir le résultat 🏆'}
             </button>
             <div className="score-bubble">
@@ -127,7 +137,7 @@ export default function McqView({
               <span className="score-separator">/</span>
               <span className="score-max">{maxScoreUpTo + (question.difficulty)}</span>
             </div>
-          </div>
+          </div> */}
         </div>
       )}
     </div>

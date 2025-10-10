@@ -20,6 +20,6 @@ export const selctTxt = (htmlElement) => {
     htmlElement.target.select();
 }
 
-export const routeExceptions = ["settings", "info"];
-export const scoreExceptions = ["settings", "info"];
-
+export const routeExceptions = ["settings", "info"];        // type
+export const scoreExceptions = ["settings", "info"];        // type
+export const hasIconAsIcon = ["Parcoursup", "ChatGPT", "À Propos"];        // name
